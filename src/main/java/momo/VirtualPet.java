@@ -1,71 +1,58 @@
 package momo;
 
-import java.util.ArrayList;
-
 public class VirtualPet {
 
-	private String petName = "Bubbles";
-	private String petName1 = "Ringo";
-	private String petName2 = "Fire";
-	private String petName3 = "Buster";
-	private String petName4 = "Scarlett";
-	private String petName5 = "Blue";
-
-	// ArrayList<String> pets = new ArrayList<String>();
-	// String[]Integer[][] pets = {{"Bubbles"}, {30}, {20}};
-	Object petsObject[][] = { { "Bubble", 30, 25 }, { "Fire", 20, 30 } };
-
-	public void createPet() {
-
+	private String petName;
+	private int hunger;
+	private int thirst;
+	private int boredom;
+	private String description;
 	
-		
+	public VirtualPet(String petName, String description) {
+		this.petName = petName;
+		this.description = description;
+		this.hunger = 0;
+		this.thirst = 0;
+		this.boredom = 0;
 	}
-
+	public VirtualPet(String petName, String description, int hunger, int thirst, int boredom) {
+		this.petName = petName;
+		this.description = description;
+		this.thirst = thirst;
+		this.hunger = hunger;
+		this.boredom = boredom;
+	}
+	
+	
+	
 	public String getPetName() {
 		return petName;
 	}
-
 	public void setPetName(String petName) {
 		this.petName = petName;
 	}
-
-	public String getPetName1() {
-		return petName1;
+	public int getHunger() {
+		return hunger;
 	}
-
-	public void setPetName1(String petName1) {
-		this.petName1 = petName1;
+	public void setHunger(int hunger) {
+		this.hunger = hunger;
 	}
-
-	public String getPetName2() {
-		return petName2;
+	public int getThirst() {
+		return thirst;
 	}
-
-	public void setPetName2(String petName2) {
-		this.petName2 = petName2;
+	public void setThirst(int thirst) {
+		this.thirst = thirst;
 	}
-
-	public String getPetName3() {
-		return petName3;
+	public int getBoredom() {
+		return boredom;
 	}
-
-	public void setPetName3(String petName3) {
-		this.petName3 = petName3;
+	public void setBoredom(int boredom) {
+		this.boredom = boredom;
 	}
-
-	public String getPetName4() {
-		return petName4;
+	public String getDescription() {
+		return description;
 	}
-
-	public void setPetName4(String petName4) {
-		this.petName4 = petName4;
-	}
-
-	public String getPetName5() {
-		return petName5;
-	}
-
-	public void setPetName5(String petName5) {
-		this.petName5 = petName5;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

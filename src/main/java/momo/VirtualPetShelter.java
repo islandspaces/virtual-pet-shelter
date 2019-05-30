@@ -1,77 +1,129 @@
 package momo;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.*;
 import java.util.Map.Entry;
 
-
 public class VirtualPetShelter {
 
-	// private String petName;
-	private String description;
-	//private Enumeration<String> namesOfPet;
-	private String petName;
-	private static Map<String, String> pet = new HashMap<String, String>();
+	private Map<String, VirtualPet> pets = new HashMap<>();
 
-	public void getShelterPets() {
-		pet.put("Bubbles", "This pet is fluffy and lazy");
-		pet.put("Ringo", "Old fashion dog that loves to cuddle");
-		pet.put("Fire", "Strong and always ready to go");
-		pet.put("Buster", "This pet is loved by all the other dogs");
-		pet.put("Scarlett", "This pet just love to flaunt her beauty");
-		pet.put("Blue", "This pet loves wild adventure");
-   
-   for(Entry<String, String> entry : pet.entrySet()) {
-			System.out.println("[" + entry.getKey() + "]" + " " + entry.getValue());
+	public VirtualPetShelter() {
+
+		pets.put("Bubbles", new VirtualPet("Bubbles", "This pet is fluffy and lazy", 55, 20, 40));
+		pets.put("Ringo", new VirtualPet("Ringo", "Old fashion dog that loves to cuddle", 35, 25, 60));
+		pets.put("Fire", new VirtualPet("Fire", "Strong and always ready to go", 44, 55, 35));
+		pets.put("Buster", new VirtualPet("Buster", "This pet is loved by all the other dogs", 60, 20, 40));
+		pets.put("Scally", new VirtualPet("Scally", "This pet just love to flaunt her beauty", 45, 35, 80));
+		pets.put("Blue", new VirtualPet("Blue", "This pet loves wild adventure", 44, 50, 10));
+	}
+
+	public void displayPets() {
+		System.out.println("Name " + " | " + " Hunger " + "|" + " Thirst " + "|" + " Boredom");
+		System.out.println("=======================================");
+		for (Entry<String, VirtualPet> pair : pets.entrySet()) {
+			VirtualPet pet = pair.getValue();
+			System.out.println(pet.getPetName() + "\t " + pet.getHunger() + " \t " + pet.getThirst() + " \t "
+					+ pet.getBoredom() + " \t ");
+		}
+
+	}
+
+	public void addPet(String name, String description) {
+		boolean validPet = false;
+		for (Entry<String, VirtualPet> pet : pets.entrySet()) {
+			if (pet.getKey().contains(name)) {
+				validPet = true;
+				break;
+			} else {
+				validPet = false;
+			}
+
+		}
+		if (!validPet) {
+			pets.put(name, new VirtualPet(name, description));
+			System.out.println("Thank you! " + name + " has been successfully admitted into our shelter");
+		}
+		else {
+			System.out.println(name + " is already in our shelter");
 		}
 	}
 
-	public static void getPetByName(String petName) {
-		String petFound = null;
-		 for(Entry<String, String> keys : pet.entrySet()) {
-				if (keys.getKey().contains(petName)) {
-					petFound = VirtualPetShelter.pet.get(petName);
-					break;
-			}
-			else {
-				petFound = "We do not have that pet in our shelter";
+	public VirtualPet adoptPet(String name) {
+		return pets.remove(name);
+	}
+
+	public void feedAllPet() {
+		for (Entry<String, VirtualPet> pet : pets.entrySet()) {
+			pet.getValue().setHunger(0);
+		}
+		System.out.println("All the dogs have been fed! ");
+	}
+
+	public void waterAllPet() {
+		for (Entry<String, VirtualPet> pet : pets.entrySet()) {
+			pet.getValue().setThirst(0);
+		}
+		System.out.println("All the dogs have been watered");
+	}
+
+	public void playwithPet(String name) {
+		boolean validPet = false;
+		for (Entry<String, VirtualPet> pet : pets.entrySet()) {
+			if (pet.getKey().contains(name)) {
+				pets.get(name).setBoredom(0);
+				validPet = true;
+				break;
+			} else {
+				validPet = false;
 			}
 		}
-		System.out.println("[" + petName + "]" + " " + petFound);
+		if (validPet) {
+			System.out.println("You have played with " + name);
+		} else {
+			System.out.println("Sorry, we do not have any pet with that name in our shelter");
+		}
 	}
-	
-	public void intakeHomelessPet(String newPetName, String petDescription) {
-		// for (Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();it.hasNext();) 
-		 for(Entry<String, String> entry : pet.entrySet()) {
-			 if (entry.getKey().contains(newPetName)){
-				 System.out.println("We already have that pet in our shelter");
-				 break;		
-			}
-			 
-			else {
-				VirtualPetShelter.pet.put(newPetName, petDescription);
-				System.out.println("We have successfully taken your pet in our shelter - thank you!");
-				}
-			 for(Entry<String, String> newList : VirtualPetShelter.pet.entrySet()) {
-					System.out.println("[" + newList.getKey() + "]" + " " + newList.getValue());
-				}
+
+	public void waterPetByName(String name) {
+		boolean validPet = false;
+		for (Entry<String, VirtualPet> pet : pets.entrySet()) {
+			if (pet.getKey().contains(name)) {
+				pet.getValue().setThirst(0);
+				validPet = true;
+				break;
+			} else {
+				validPet = false;
 			}
 		}
-	
+		if (validPet) {
+			System.out.println(name + " has been watered ");
+		} else {
+			System.out.println("Sorry, we do not have any pet with that name in our shelter");
+		}
 
-	public String getPetName() {
-		return petName;
 	}
 
-	public void setPetName(String petName) {
-		this.petName = petName;
+	public void feedPetByName(String name) {
+		boolean validPet = false;
+		for (Entry<String, VirtualPet> pet : pets.entrySet()) {
+			if (pet.getKey().contains(name)) {
+				pet.getValue().setHunger(0);
+				validPet = true;
+				break;
+			} else {
+				validPet = false;
+			}
+		}
+		if (validPet) {
+			System.out.println(name + " has been fed ");
+		} else {
+			System.out.println("Sorry, we do not have any pet with that name in our shelter");
+		}
 	}
 
-	public String getDescription() {
-		return description;
-	}
+	void tick() {
 
-	public void setDescription(String description) {
-		this.description = description;
 	}
-
 }
