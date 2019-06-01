@@ -11,10 +11,11 @@ public class VirtualPet {
 	public VirtualPet(String petName, String description) {
 		this.petName = petName;
 		this.description = description;
-		this.hunger = 0;
-		this.thirst = 0;
-		this.boredom = 0;
+		this.hunger = 25;
+		this.thirst = 35;
+		this.boredom = 47;
 	}
+	
 	public VirtualPet(String petName, String description, int hunger, int thirst, int boredom) {
 		this.petName = petName;
 		this.description = description;

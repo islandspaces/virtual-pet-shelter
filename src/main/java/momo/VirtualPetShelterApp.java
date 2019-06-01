@@ -3,34 +3,18 @@ package momo;
 import java.util.Scanner;
 
 public class VirtualPetShelterApp {
-
-	static VirtualPetShelter vps = new VirtualPetShelter();
-	static int userInput;
-
+	
 	public static void main(String[] arg) {
-
-		displayMessages();
-
-		performAction();
-
-//		vps.waterPetByName("Scalett");
-//
-//		vps.feedPetByName("Buster");
-
-	}
-
-	public static void displayMessages() {
-		System.out.println("Welcome! And thank you for volunteering at Momo Virtual Pet Shelter");
-		System.out.println(" ");
-		System.out.println("Here is the status of our pets currently in our shelter: ");
-		System.out.println(" ");
+		Scanner input = new Scanner(System.in);
+		int userInput;
+		VirtualPetShelter vps = new VirtualPetShelter();
+		
+		VirtualPetShelterApp vpsa = new VirtualPetShelterApp();
+		vpsa.displayMessages();
 		vps.displayPets();
 		System.out.println(" ");
-	}
 
-	public static void performAction() {
-
-		Scanner input = new Scanner(System.in);
+		
 		do {
 			System.out.println("What would you like to do next? ");
 			System.out.println(" ");
@@ -43,7 +27,7 @@ public class VirtualPetShelterApp {
 			System.out.println("7. Admit a pet ");
 			System.out.println("8. Quit ");
 
-			userInput = input.nextInt();
+			userInput = Integer.parseInt(input.nextLine());
 
 			switch (userInput) {
 			case 1:
@@ -51,7 +35,7 @@ public class VirtualPetShelterApp {
 				break;
 			case 2:
 				System.out.println("Enter the pet's name to feed");
-				String name = input.next();
+				String name = input.nextLine();
 				vps.feedPetByName(name);
 				break;
 			case 3:
@@ -59,22 +43,37 @@ public class VirtualPetShelterApp {
 				break;
 			case 4:
 				System.out.println("Enter the pet's name to water");
-				name = input.next();
+				name = input.nextLine();
 				vps.waterPetByName(name);
 				break;
 			case 5:
 				System.out.println("Enter the pet's name to play with");
-				name = input.next();
+				name = input.nextLine();
 				vps.playwithPet(name);
+				break;
+			case 6: 
+				System.out.println("Enter the name of the pet you'd like to adopt ");
+				name = input.nextLine();
+				vps.adoptPet(name);
 				break;
 			case 7:
 				System.out.println("Enter the name of the pet to admit");
-				name = input.next();
+				name = input.nextLine();
 				System.out.println("Enter a description of the pet");
-				String description = input.next();
+				String description = input.nextLine();
 				vps.addPet(name, description);
+				vps.displayPets();
 				break;
 			}
 		} while (userInput != 8);
 	}
+
+	
+	public void displayMessages() {
+		System.out.println("Welcome! And thank you for volunteering at Momo Virtual Pet Shelter");
+		System.out.println(" ");
+		System.out.println("Here is the status of our pets currently in our shelter: ");
+		System.out.println(" ");
+	}
+
 }

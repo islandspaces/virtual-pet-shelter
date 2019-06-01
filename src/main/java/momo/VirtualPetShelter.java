@@ -1,7 +1,5 @@
 package momo;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -20,11 +18,11 @@ public class VirtualPetShelter {
 	}
 
 	public void displayPets() {
-		System.out.println("Name " + " | " + " Hunger " + "|" + " Thirst " + "|" + " Boredom");
+		System.out.println("Name \t | " + " Hunger " + "|" + " Thirst " + "| " + " Boredom");
 		System.out.println("=======================================");
 		for (Entry<String, VirtualPet> pair : pets.entrySet()) {
 			VirtualPet pet = pair.getValue();
-			System.out.println(pet.getPetName() + "\t " + pet.getHunger() + " \t " + pet.getThirst() + " \t "
+			System.out.println(pet.getPetName() + "\t|\t "  + pet.getHunger() + " \t | " + pet.getThirst() + " \t "
 					+ pet.getBoredom() + " \t ");
 		}
 
@@ -50,8 +48,25 @@ public class VirtualPetShelter {
 		}
 	}
 
-	public VirtualPet adoptPet(String name) {
-		return pets.remove(name);
+	public void adoptPet(String name) {
+		boolean validPet = false;
+		for (Entry<String, VirtualPet> pet : pets.entrySet()) {
+			if (pet.getKey().contains(name)) {
+				validPet = true;
+				break;
+			} else {
+				validPet = false;
+			}
+
+		}
+		if (validPet) {
+			 pets.remove(name);
+			System.out.println("You have sucessfully adopted " + name );
+		}
+		else {
+			System.out.println(name + " is not in our shelter");
+		}
+		
 	}
 
 	public void feedAllPet() {
