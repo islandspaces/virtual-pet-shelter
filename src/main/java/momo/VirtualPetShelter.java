@@ -91,7 +91,9 @@ public class VirtualPetShelter {
 
 	public void waterAllPet() {
 		for (Entry<String, VirtualPet> pet : pets.entrySet()) {
-			pet.getValue().setThirst(0);
+			if (!pet.getValue().getIsRobotic().equals(true)) {
+				pet.getValue().setThirst(0);
+			}
 		}
 		System.out.println("All the dogs have been watered");
 	}
